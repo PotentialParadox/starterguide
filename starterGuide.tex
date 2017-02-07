@@ -1,0 +1,314 @@
+\documentclass{article}
+\topmargin=0.0in %length of margin at the top of the page (1 inch added by default)
+\oddsidemargin=0.0in %length of margin on sides for odd pages
+\evensidemargin=0in %length of margin on sides for even pages
+\textwidth=6.5in %How wide you want your text to be
+\marginparwidth=0.5in
+\headheight=0pt %1in margins at top and bottom (1 inch is added to this value by default)
+\headsep=0pt %Increase to increase white space in between headers and the top of the page
+\textheight=9.0in %How tall the text body is allowed to be on each page
+\usepackage{etoolbox}
+\AtBeginEnvironment{itemize}{\begin{multicols}{2}}    %%% this line
+\AtEndEnvironment{itemize}{\end{multicols}}            %%% and this one
+\usepackage{multicol}
+\usepackage{hyperref}
+\usepackage{indentfirst}
+\hypersetup{
+    bookmarks=true,         % show bookmarks bar?
+    unicode=false,          % non-Latin characters in Acrobat’s bookmarks
+    pdftoolbar=true,        % show Acrobat’s toolbar?
+    pdfmenubar=true,        % show Acrobat’s menu?
+    pdffitwindow=false,     % window fit to page when opened
+    pdfstartview={FitH},    % fits the width of the page to the window
+    pdftitle={My title},    % title
+    pdfauthor={Author},     % author
+    pdfsubject={Subject},   % subject of the document
+    pdfcreator={Creator},   % creator of the document
+    pdfproducer={Producer}, % producer of the document
+    pdfkeywords={keyword1, key2, key3}, % list of keywords
+    pdfnewwindow=true,      % links in new PDF window
+    colorlinks=true,       % false: boxed links; true: colored links
+    linkcolor=red,          % color of internal links (change box color with linkbordercolor)
+    citecolor=green,        % color of links to bibliography
+    filecolor=magenta,      % color of file links
+    urlcolor=cyan           % color of external links
+}
+\begin{document}
+
+\title{Development Research Starter Guide}
+\author{Dustin Tracy}
+\maketitle
+
+\section*{Introduction}
+
+This guide will cover many things that we believe will be extremely helpful to anyone interested in pursuing computation chemistry deveolopment in the Roitberg Lab. 
+It was made with the guidance and recommendations of many of the more senior students. 
+In order to avoid reinventing the wheel, I've added links to sites I've felt gave a very good explanations to the things I've mentioned.
+If you run across something you don't understand, most likely the explanation can be found in one of these hyperlinked sites.
+We will be covering the following topics: \\
+
+\begin{itemize}
+\item Unix System
+\item Bash commands
+\item Text Editors
+\item IDEs
+\item Programming Languages
+\item Github
+\item Graphing
+\end{itemize}
+
+\section*{Unix System}
+Before we get started, however, I'd like to give a recommendation that you use linux or OSX for your work done in this lab. 
+Many of the programs we work with only run in unix like operating systems.
+So if you ever wanted to work on something on you personal computer, you may not be able to do so with the Windows OS\. 
+Also, many of the text file are incompatible between the two systems and conversions will have to be made.
+I recommend you use a virtual machine to test out some of the most common distros before you make a leap to \href{https://help.ubuntu.com/community/WindowsDualBoot}{dualbooting.}
+This \href{http://henricasanova.github.io/VirtualBoxUbuntuHowTo.html}{\textbf{site}} provides a useful guide on how to do a VM install of Ubuntu.
+Other recommended distros would be \textbf{OpenSUSE}, \textbf{FEDORA}, and \textbf{CentOS}. (These are some of the most commonly supported free distros)
+
+A very good introduction to the unix system can be found \href{http://linuxcommand.org/lc3\_learning\_the\_shell.php}{here}.
+If you migrate from windows, the first major change you may notice will be how the directory structure is different.
+The famous \textit{C://Programs} directory no longer exists.
+Where then are all the programs?
+Linux systems follow the \href{https://en.wikipedia.org/wiki/Filesystem\_Hierarchy\_Standard}{Filesystem Hierarchy Standard}.
+Mac OSX uses a slightly different version.
+Both hierarchies can be found with the command \textbf{man hier}.
+Many permission problems can be avoided if you follow this hierarchy.
+
+Now, as the unix guide given mentions, a shell is the interface between the user and the kernel.
+You most likely have bash installed as your default, and this guide will assume you do, though there are quite a few alternatives.
+Here are two of what I consider your best options.
+Please watch these videos before you decide.
+Bash very well may not be your best option, zsh probably is.
+\begin{description}
+  \item \href{https://www.youtube.com/watch?v=1S3MUVIAieE}{zsh}
+  \item \href{https://www.youtube.com/watch?v=SWmKfb2jQhU}{fish}
+\end{description}
+For compatibility, write mobile scripts in bash.
+
+\section*{Shell Commands}
+
+You may already know how to use many of the most common commands such as
+\begin{description}
+  \item[pwd] print the current directory
+  \item[cd] change the directory
+  \item[ls] list the current files and directories in the current directory
+  \item[rm/cp/mv] the delete, copy, and move commands
+\end{description}
+If you don't know what these things are, theres an excellent tutorial found \href{http://linuxcommand.org/lc3\_learning\_the\_shell.php}{\textbf{here}}
+This tutorial is written for bash, but most, if not all the commands will work for the other recommend shells.
+However, when you begin development, or even if you simply want to install Amber, these commands will not be enough, further commands must be learnt. 
+You may also need to make modifications to your configuration files.
+
+The commands you should learn with links to the sites with explanations are
+
+\begin{description}
+  \item[\href{http://www.cyberciti.biz/faq/search-for-files-in-bash/}{\textbf{locate}}] outputs the locations of a file
+  \item[\href{http://ss64.com/bash/which.html}{\textbf{which}}] locate a program file in the user's path
+  \item[\href{http://www.cyberciti.biz/faq/linux-unix-shell-export-command/}{\textbf{export}}] adjust bash directory variables, add directories to user paths
+  \item[\href{http://tldp.org/LDP/abs/html/aliases.html}{\textbf{alias}}] create a file path variable
+  \item[\href{http://www.panix.com/~elflord/unix/grep.html}{\textbf{grep}}] create a file path variable
+  \item[\href{http://www.grymoire.com/Unix/Awk.html}{\textbf{awk}}] create a file path variable
+  \item[\href{http://www.grymoire.com/Unix/Sed.html}{\textbf{sed}}] create a file path variable
+\end{description}
+
+\section*{Remote Computing}
+Running programs can be very computationally expensive. 
+Often, these programs are too powerful for your personal computer.
+You will need to use a remote center.
+SSH, is a protocol for doing so.
+The university provides a high performance computer (hpc) for us to use.
+They have a \href{http://wiki.hpc.ufl.edu/doc/Getting\_Started}{guide} for you to get started.
+\href{http://www.ncsa.illinois.edu/enabling/bluewaters}{Bluewaters} is another center we will often use.
+You can also ask for access our labs local computers.
+
+When you connect over ssh, in order to run certain programs for the server, you will need an Xserver.
+Linux machines come with this built in.
+Mac's will need to install \href{http://www.xquartz.org/}{xquartz}
+For both Mac and Linux, when you loggin, make sure to use the -Y flag to enable Xserver.
+
+For transferring data between systems we recommend you use a service called \href{https://www.globus.org/researchers/getting-started}{Globus}.
+To create a personal endpoint you can follow \href{https://support.globus.org/entries/23881557}{these directions}.
+Often, mounting a remote directory as a drive on your personal computer can quite useful.
+Directions exist for both \href{http://www.macissues.com/2014/10/13/how-to-mount-a-remote-system-as-a-drive-using-ssh-in-os-x/}{Mac} and \href{http://www.cyberciti.biz/faq/how-to-mount-remote-directory-filesystems-with-sshfs-on-linux/}{Linux}
+Note that I believe Ubuntu has a right click option in their directory explorer.
+
+
+\section*{Programming Languages}
+
+For development work in the Roitberg Lab, you will need to know a few programming languages.
+Each one has its own utilities. These programming languages are
+
+\begin{description}
+  \item[\href{http://www.fortrantutorial.com/}{FORTRAN}] Amber is written in this, so of course this is important
+  \item[\href{https://docs.python.org/3/tutorial/}{Python}] Python is a fantastic tool for analysis, containing incredible libraries such as matplotlib, scipy, pandas, etc..
+    I also use it for text parsing, though I guess you could use grep, awk, or sed instead.
+    As for deciding between python2 or python3. It doesn't really matter right now, 2015 (they're not that different), but python3 is the way of the future.
+  \item[\href{http://www.cplusplus.com/doc/tutorial/introduction/}{C/C++}] These languages will be most useful if you are working with nVidias' CUDA api, which is written for C/C++.
+\end{description}
+
+Further tutorials can be found at \href{https://training.it.ufl.edu/services/lynda/}{\textbf{Lynda.com}}.
+After you've finished the tutorials, you can continue practicing on problems provided by numerous sites.
+The first one is a great introduction into computational chemistry problems..
+
+\begin{enumerate}
+  \item \href{http://sirius.chem.vt.edu/wiki/doku.php?id=crawdad:programming}{VT Crawdad Problems}
+  \item \href{http://train.usaco.org/usacogate}{USACO}
+  \item \href{http://www.amazon.com/Elements-Programming-Interviews-Insiders-Guide/dp/1479274836/ref=sr\_1\_3?s=books&ie=UTF8&qid=1446406481&sr=1-3&keywords=cracking+the+coding+interview}{EPI}
+  \item \href{https://projecteuler.net/}{Project Euler}
+  \item \href{https://www.kaggle.com/}{Kaggle}
+  \item \href{https://www.topcoder.com/}{Top Coder}
+\end{enumerate}
+
+\section*{Writing Programs}
+
+Once you have decided which programming language you will use to write your project, you then need to decide which program you will use to write it.
+There are quite a few options.
+First there are two large categories of programming development tools, text editors and integrated development environments (IDE's).
+A discussion of the advantages-disadvantages can be found \href{http://stackoverflow.com/questions/208193/why-should-i-use-an-ide}{here}.
+
+The most widely used text editors are
+
+\begin{itemize}
+  \item{vim}
+  \item{emacs}
+  \item{sublime text}
+  \item{atom}
+\end{itemize}
+
+Many people in this lab use vim, which is the editor I would currently recommend. 
+However, it does have a fairly tough learning curve.
+To help learn it, people have created a \href{http://www.openvim.com/}{free tutorial} as well as a fun, very effective \href{http://vim-adventures.com/}{game}.
+Its also very customizable, and there are many plugins that improve the program.
+I've posted a nice \href{https://github.com/PotentialParadox/User\_Configurations}{configuration} to get you started.
+Emacs is the other primary contender, though I've only spend a week or so with it. 
+I currently like vim more because of how fast it loads over ssh, and how portable the configuration files are.
+
+Some of the most widely used IDE's are
+
+\begin{itemize}
+  \item{\href{http://www.codeblocks.org/}{Code::Blocks}}
+  \item{\href{https://eclipse.org/downloads/}{Eclipse}}
+  \item{\href{https://netbeans.org/}{NetBeans}}
+  \item{\href{https://www.visualstudio.com/en-us/visual-studio-homepage-vs.aspx}{VisualStudios}}
+  \item{\href{https://developer.apple.com/xcode/}{Xcode}}
+  \item{\href{https://www.jetbrains.com/}{JetBrains Suite}}
+\end{itemize}
+
+I've tried all of these. 
+My favorite's lie in the JetBrain suite. 
+Justin's is Codblocks. 
+Care should be taken to note the supported compilation archetecture. 
+For example, currently Clion (part of Jetbrains) doesn't support make files.
+
+I use vim for almost everything now, even writing this, because I don't like having to jump between programs all the time and it allows me to work very efficiently over ssh.
+You may never need to use an IDE, but you will need to use a text editor.
+
+\section*{Github}
+You can think of Github as the Dropbox of programmers, if Dropbax allowed you create multiple versions and kept a repository of previous changes.
+It also allows you to merge versions.
+This service is extremely useful, in fact, it's so useful that OSX now incudes support for it by default.
+I recommend you look at the \href{https://help.github.com/categories/bootcamp/}{guide} posted on their website.
+You should also check out this \href{https://www.atlassian.com/git/tutorials/}{tutorial}
+
+In my vim customization I included a plugin that deals directly with Github.
+Its called vim-fugitive, and I recommend you watch their screencasts found \href{https://github.com/tpope/vim-fugitive}{here}.
+
+
+\section*{Graphing}
+
+Regardless of what you do in this lab, you will eventually need to plot some data.
+Here are some of the recommended programs.
+
+\begin{description}
+  \item[\href{http://alvinalexander.com/technology/gnuplot-charts-graphs-examples}{gnu-plot}] no GUI, but can find documentation
+  \item[\href{http://www.phy.ohiou.edu/~elster/phys5071/extras/xmgrace\_tutorial.pdf}{grace}] hard to find documentation but contains a GUI
+  \item[\href{http://matplotlib.org/}{matplotlib}] python module, lots of documentation ** Favorite
+\end{description} 
+
+\section*{Examples}
+
+\subsubsection*{example 1}
+Suppose you want to install \textbf{Amber}. 
+You are given the tar file from one of your group members.
+You then look at the manual for directions on how to install.
+We will assume you have all the necessary libraries installed. (We'll cover what libraries are shortly)
+It tells you to extract into your installation directory and gives you \textit{/home/myname} as an example.
+You are unsure if this is what you want to do, so you open the FSH with \textbf{man hier}.
+You realize that if you're not the computer administrator this is a perfectly fine place to put it.
+However, you are, and according to FHS, the program should go to \textit{/opt}.
+So you extract into \textit{/opt}.
+The manual then directs you to \textbf{export AMBERHOME=/home/myname/amber14}.
+You quickly translate that to \textbf{export AMBERHOME=/opt/amber14}.
+But what does this do?
+Well you can think of an export as creating a shortcut to be used by the shell or anything running inside it.
+So instead of typing in \textbf{/opt/amber13} you can use \textbf{\$AMBERHOME}.
+That saves some time. 
+But its true utility lies in the ability for other programs to use these exports.
+If a program needs to use a file from a directory within \textbf{AMBERHOME}, it no longer needs the user to tell it where to look.
+It simply lets the shell redirect it.
+
+\subsubsection*{example 2}
+We have just installed CUDA, nVIDIA's API for utilizing their gpus.
+We've installed it in the directory \textit{/usr/local/cuda}.
+In this CUDA directory, there are a few directories, including  \textit{bin} and \emph{lib64}.
+\textit{bin} contains the compiler that we will want to be able to call from the shell, \textbf{nvcc}.
+\textit{lib64} contains a bunch of shared library files.
+
+We try to compile with \smallskip \\
+
+\centerline{\textbf{nvcc}} \smallskip
+
+\hfill
+
+We receive an output \smallskip \\
+
+\centerline{\textbf{nvcc: command not found}} \smallskip 
+
+\hfill
+
+How can this be?
+We just installed it.
+Maybe \textbf{nvcc} isn't in the path.
+We type the command  \smallskip \\
+
+\centerline{\textbf{which nvcc}} \smallskip
+
+\hfill
+
+Nothing.
+We then open our shell config and add the line \smallskip \\
+
+\centerline{\textbf{export PATH=/usr/local/cuda/bin:\$PATH}} \smallskip
+
+\hfill
+
+After we source our new configuration, \textbf{nvcc} returns \textit{/usr/local/cuda/bin}.
+
+\hfill
+
+We've solved our problem.
+But we quickly stumble upon another.
+When we try to compile, we keep getting a message that some libraries aren't found.
+We now know how to fix this easily. We open our config file, and add the line \smallskip \\
+
+\centerline{\textbf{export LD\_LIBRARY\_PATH=/user/local/cuda/lib64:\$LD\_LIBRARY\_PATH}}
+
+\hfill
+
+And our problems are solve.
+
+\section*{Latex}
+
+Latex is an editor that is very widely used in peer reviewed journals.
+You can think of Latex as the HTML of word processors.
+A quick tutorial can be found \href{http://www.latex-tutorial.com/tutorials/}{\textbf{here}}
+Bibliographies can sometimes be difficult to work with.
+I've been using vim as my editor while using BibLatex with biber as a backend.
+To generate the pdf, I enter four commands:
+pdflatex
+biber
+pdflatex
+pdflatex
+
+\end{document}
