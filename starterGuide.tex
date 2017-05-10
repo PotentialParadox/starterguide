@@ -64,7 +64,7 @@ So if you ever wanted to work on something on you personal computer, you may not
 Also, many of the text file are incompatible between the two systems and conversions will have to be made.
 I recommend you use a virtual machine to test out some of the most common distros before you make a leap to \href{https://help.ubuntu.com/community/WindowsDualBoot}{dualbooting.}
 This \href{http://henricasanova.github.io/VirtualBoxUbuntuHowTo.html}{\textbf{site}} provides a useful guide on how to do a VM install of Ubuntu.
-Other recommended distros would be \textbf{OpenSUSE}, \textbf{FEDORA}, and \textbf{CentOS}. (These are some of the most commonly supported free distros)
+Other recommended distros would be \textbf{Opensuse}, \textbf{FEDORA}, and \textbf{Arch} for those people who like to jump right in. (These are some of the most commonly supported free distros)
 
 A very good introduction to the unix system can be found \href{http://linuxcommand.org/lc3\_learning\_the\_shell.php}{here}.
 If you migrate from windows, the first major change you may notice will be how the directory structure is different.
@@ -201,8 +201,9 @@ Justin's is Codblocks.
 Care should be taken to note the supported compilation archetecture. 
 For example, currently Clion (part of Jetbrains) doesn't support make files.
 
-I use vim for almost everything now, even writing this, because I don't like having to jump between programs all the time and it allows me to work very efficiently over ssh.
-You may never need to use an IDE, but you will need to use a text editor.
+IDEs are not necessary, in fact, many developers prefer to use text editors such as VIM or Emacs for most of their work.
+Try a few and find something you like.
+
 
 \section*{Github}
 You can think of Github as the Dropbox of programmers, if Dropbax allowed you create multiple versions and kept a repository of previous changes.
@@ -230,7 +231,7 @@ Here are some of the recommended programs.
 
 \subsubsection*{example 1}
 Suppose you want to install \textbf{Amber}. 
-You are given the tar file from one of your group members.
+You are given are either given the tar file from one of your group members or you download from git.
 You then look at the manual for directions on how to install.
 We will assume you have all the necessary libraries installed. (We'll cover what libraries are shortly)
 It tells you to extract into your installation directory and gives you \textit{/home/myname} as an example.
@@ -238,11 +239,11 @@ You are unsure if this is what you want to do, so you open the FSH with \textbf{
 You realize that if you're not the computer administrator this is a perfectly fine place to put it.
 However, you are, and according to FHS, the program should go to \textit{/opt}.
 So you extract into \textit{/opt}.
-The manual then directs you to \textbf{export AMBERHOME=/home/myname/amber14}.
-You quickly translate that to \textbf{export AMBERHOME=/opt/amber14}.
+The manual then directs you to \textbf{export AMBERHOME=/home/myname/amber17}.
+You quickly translate that to \textbf{export AMBERHOME=/opt/amber17}.
 But what does this do?
 Well you can think of an export as creating a shortcut to be used by the shell or anything running inside it.
-So instead of typing in \textbf{/opt/amber13} you can use \textbf{\$AMBERHOME}.
+So instead of typing in \textbf{/opt/amber17} you can use \textbf{\$AMBERHOME}.
 That saves some time. 
 But its true utility lies in the ability for other programs to use these exports.
 If a program needs to use a file from a directory within \textbf{AMBERHOME}, it no longer needs the user to tell it where to look.
